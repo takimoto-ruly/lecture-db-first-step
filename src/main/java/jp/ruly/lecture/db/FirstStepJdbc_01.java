@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class FirstStepJdbc {
+public class FirstStepJdbc_01 {
 
 	private static final String URL = "jdbc:postgresql://localhost:5432/mydb";
 	private static final String USER = "postgres";

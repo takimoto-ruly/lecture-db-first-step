@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SecondStepJdbc {
+public class FirstStepJdbc_02 {
 
 	private static final String URL = "jdbc:postgresql://localhost:5432/postgres";
 	private static final String USER = "postgres";
@@ -20,6 +20,10 @@ public class SecondStepJdbc {
 		try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);) {
+
+			System.out.println("接続完了");
+			System.out.println("--------------------------------------------------");
+
 			while (rs.next()) {
 				int id = rs.getInt("ユーザーID");
 				String name = rs.getString("氏名");
@@ -27,8 +31,8 @@ public class SecondStepJdbc {
 
 				System.out.printf("ID:%d,名前:%s,メール:%s\n", id, name, email);
 			}
-			System.out.print("--------------------------------------------------");
-			System.out.print("データ取得完了");
+			System.out.println("--------------------------------------------------");
+			System.out.println("データ取得完了");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
