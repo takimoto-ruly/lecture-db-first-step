@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.ruly.lecture.db.mybatis.takimoto.domain.repository.UsersMapper">
+  <select id="selectAll" resultType="jp.ruly.lecture.db.mybatis.takimoto.domain.entity.Users">
+    SELECT id
+         , name
+         , email
+      FROM users
+     ORDER BY id
+  </select>
+</mapper>

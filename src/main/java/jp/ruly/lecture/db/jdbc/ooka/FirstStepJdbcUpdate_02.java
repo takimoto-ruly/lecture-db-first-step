@@ -1,4 +1,4 @@
-package jp.ruly.lecture.db;
+package jp.ruly.lecture.db.jdbc.ooka;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
