@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.ruly.lecture.db.mybatis.takimoto.training.basic">
+
+    <select id="selectAll" resultType="sample.model.Book">
+        SELECT id, title, author, price FROM books
+    </select>
+
+    <select id="selectById" parameterType="int" resultType="sample.model.Book">
+        SELECT id, title, author, price FROM books WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="sample.model.Book" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO books (title, author, price)
+        VALUES #{title}, #{author}, #{price}
+    </insert>
+
+    <update id="update" parameterType="sample.model.Book">
+        UPDATE books
+        SET title = #{title}, author = #{author}, price = #{price}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM books WHERE id = #{id}
+    </delete>
+
+</mapper>

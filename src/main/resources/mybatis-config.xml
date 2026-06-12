@@ -17,5 +17,6 @@
   
   <mappers>
     <mapper resource="jp/ruly/lecture/db/mybatis/takimoto/domain/repository/UsersMapper.xml" />
+    <mapper resource="jp/ruly/lecture/db/mybatis/takimoto/training/standard/s01/repository/BookMapper.xml"/>
   </mappers>
 </configuration>
