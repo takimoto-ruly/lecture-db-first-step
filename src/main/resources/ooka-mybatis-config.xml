@@ -17,7 +17,6 @@
 	</environments>
 
 	<mappers>
-		<mapper
-			resource="jp/ruly/lecture/db/mybatis/ooka/domain/repository/UsersMapper.xml" />
+		<mapper resource="jp/ruly/lecture/db/mybatis/ooka/domain/repository/UserMapper.xml" />
 	</mappers>
 </configuration>

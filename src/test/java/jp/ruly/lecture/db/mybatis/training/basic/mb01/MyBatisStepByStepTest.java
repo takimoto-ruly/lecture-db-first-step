@@ -15,12 +15,14 @@ import org.dbunit.database.DatabaseConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
-import org.h2.engine.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import jp.ruly.lecture.db.mybatis.training.basic.mb01.entity.User;
+import jp.ruly.lecture.db.mybatis.training.basic.mb01.repository.UserMapper;
 
 public class MyBatisStepByStepTest {
 
@@ -40,8 +42,8 @@ public class MyBatisStepByStepTest {
 		try (SqlSession session = sqlSessionFactory.openSession();
 				Connection conn = session.getConnection();
 				Statement stmt = conn.createStatement()) {
-			stmt.execute("CREATE TABLE IF NOT EXISTS user (" +
-					"id INT PRIMARY KEY AUTO_INCREMENT, " +
+			stmt.execute("CREATE TABLE IF NOT EXISTS \"user\" (" +
+					"id SELEAL PRIMARY KEY, " +
 					"name VARCHAR(50), " +
 					"age INT, " +
 					"status VARCHAR(20))");
@@ -57,6 +59,8 @@ public class MyBatisStepByStepTest {
 		// DBUnitを使ってデータを初期化 (CLEAN_INSERT)
 		Connection connection = sqlSession.getConnection();
 		IDatabaseConnection dbunitConnection = new DatabaseConnection(connection);
+		dbunitConnection.getConfig().setProperty(
+				org.dbunit.database.DatabaseConfig.PROPERTY_ESCAPE_PATTERN, "\"?\"");
 
 		try (InputStream is = getClass().getClassLoader().getResourceAsStream("dataset.xml")) {
 			var dataSet = new FlatXmlDataSetBuilder().build(is);

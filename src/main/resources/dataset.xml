@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+	<user id="1" name="Yamada" age="18" status="ACTIVE" />
+	<user id="2" name="Tanaka" age="25" status="ACTIVE" />
+	<user id="3" name="Suzuki" age="30" status="ACTIVE" />
+</dataset>
