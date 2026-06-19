@@ -1,0 +1,1 @@
+package jp.ruly.lecture.db.mybatis.training.basic.mb02.application;
