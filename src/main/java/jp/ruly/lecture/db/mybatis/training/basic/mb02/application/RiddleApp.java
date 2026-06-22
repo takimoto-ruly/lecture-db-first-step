@@ -20,13 +20,15 @@ public class RiddleApp {
 		try (InputStream inputStream = Resources.getResourceAsStream("ooka-mybatis-config.xml")) {
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
-			try (SqlSession session = sqlSessionFactory.openSession()) {
+			try (SqlSession session = sqlSessionFactory.openSession(true)) {
 				RiddleMapper mapper = session.getMapper(RiddleMapper.class);
 
 				System.out.println("1.なぞなぞに挑戦する / 2.新しいなぞなぞを追加する / 3.終了する");
-				int choice = scanner.nextInt();
+				int choice = Integer.parseInt(scanner.nextLine());
 				if (1 == choice) {
 					question(scanner, mapper);
+				} else if (2 == choice) {
+					addQuestion(scanner, mapper);
 				} else if (3 == choice) {
 					return;
 				}
@@ -76,6 +78,21 @@ public class RiddleApp {
 				System.out.println("1から3の数字を入力してください");
 			}
 		}
+	}
+
+	public void addQuestion(Scanner scanner, RiddleMapper mapper) {
+		System.out.println("問題文を入力してください：");
+		String question = scanner.nextLine();
+		System.out.println("選択肢1を入力してください：");
+		String answer1 = scanner.nextLine();
+		System.out.println("選択肢2を入力してください：");
+		String answer2 = scanner.nextLine();
+		System.out.println("選択肢3を入力してください：");
+		String answer3 = scanner.nextLine();
+		System.out.println("正解の番号（1〜3）を入力してください：");
+		int correctNum = Integer.parseInt(scanner.nextLine());
+		mapper.insert(new Riddle(null, question, answer1, answer2, answer3, correctNum));
+		System.out.println("登録完了");
 	}
 
 	public static void main(String[] args) {

@@ -12,11 +12,16 @@ public class Riddle {
 	private int correctNumber;
 
 	public Riddle(Integer id, String question, String answer1, String answer2, String answer3, Integer correctNumber) {
-		if (question == null || question.isBlank())
+		if (question == null || question.isBlank()) {
 			throw new IllegalArgumentException("問題文は必須です");
-		if (correctNumber < 1 || correctNumber > 3)
+		}
+
+		if (correctNumber < 1 || correctNumber > 3) {
 			throw new IllegalArgumentException("1～3で指定してください");
+		}
+
 		this.id = id;
+		this.question = question;
 		this.answer1 = answer1;
 		this.answer2 = answer2;
 		this.answer3 = answer3;

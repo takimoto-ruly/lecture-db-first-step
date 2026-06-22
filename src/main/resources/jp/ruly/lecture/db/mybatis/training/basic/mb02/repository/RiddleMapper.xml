@@ -5,15 +5,36 @@
 
 <mapper
 	namespace="jp.ruly.lecture.db.mybatis.training.basic.mb02.repository.RiddleMapper">
-	<select id="selectAll"
-		resultType="jp.ruly.lecture.db.mybatis.training.basic.mb02.entitty.Riddle">
+	<resultMap id="RiddleResultMap"
+		type="jp.ruly.lecture.db.mybatis.training.basic.mb02.entitty.Riddle">
+		<constructor>
+			<arg column="id" javaType="java.lang.Integer" />
+			<arg column="question" javaType="java.lang.String" />
+			<arg column="answer1" javaType="java.lang.String" />
+			<arg column="answer2" javaType="java.lang.String" />
+			<arg column="answer3" javaType="java.lang.String" />
+			<arg column="correctNumber" javaType="int" />
+		</constructor>
+	</resultMap>
+
+	<select id="selectAll" resultMap="RiddleResultMap">
 		SELECT id
 		, question
 		, answer1
-		, answer2
+		,
+		answer2
 		, answer3
-		, correct_number AS correctNumber
+		,
+		correct_number AS correctNumber
 		FROM "riddle"
-		ORDER BY id
+		ORDER BY
+		id
 	</select>
+
+	<insert id="insert">
+		INSERT INTO
+		"riddle"(question,answer1,answer2,answer3,correct_number)
+		VALUES
+		(#{question},#{answer1},#{answer2},#{answer3},#{correctNumber})
+	</insert>
 </mapper>
