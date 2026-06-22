@@ -22,20 +22,27 @@ public class RiddleApp {
 
 			try (SqlSession session = sqlSessionFactory.openSession(true)) {
 				RiddleMapper mapper = session.getMapper(RiddleMapper.class);
-
-				System.out.println("1.なぞなぞに挑戦する / 2.新しいなぞなぞを追加する / 3.終了する");
-				int choice = Integer.parseInt(scanner.nextLine());
-				if (1 == choice) {
-					question(scanner, mapper);
-				} else if (2 == choice) {
-					addQuestion(scanner, mapper);
-				} else if (3 == choice) {
-					return;
+				while (true) {
+					int choice = mainMenu(scanner);
+					if (1 == choice) {
+						question(scanner, mapper);
+					} else if (2 == choice) {
+						addQuestion(scanner, mapper);
+					} else if (3 == choice) {
+						System.out.println("終了します");
+						break;
+					}
 				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public int mainMenu(Scanner scanner) {
+		System.out.println("1.なぞなぞに挑戦する / 2.新しいなぞなぞを追加する / 3.終了する");
+		return Integer.parseInt(scanner.nextLine());
+
 	}
 
 	private void question(Scanner scanner, RiddleMapper mapper) {
@@ -68,7 +75,7 @@ public class RiddleApp {
 		System.out.println("正解番号を入力してください(1から3)");
 		while (true) {
 			try {
-				int input = scanner.nextInt();
+				int input = Integer.parseInt(scanner.nextLine());
 				if (input < 1 || input > 3) {
 					throw new IllegalArgumentException();
 				}
