@@ -3,6 +3,7 @@ package jp.ruly.lecture.db.mybatis.training.basic.mb02.application;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import org.apache.ibatis.io.Resources;
@@ -22,18 +23,22 @@ public class RiddleApp {
 
 			try (SqlSession session = sqlSessionFactory.openSession(true)) {
 				RiddleMapper mapper = session.getMapper(RiddleMapper.class);
+
 				while (true) {
 					int choice = mainMenu(scanner);
 					if (1 == choice) {
 						question(scanner, mapper);
+
 					} else if (2 == choice) {
 						addQuestion(scanner, mapper);
+
 					} else if (3 == choice) {
 						System.out.println("終了します");
 						break;
 					}
 				}
 			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -51,15 +56,26 @@ public class RiddleApp {
 			System.out.println("問題がありません");
 			return;
 		}
-		Riddle question = riddles.get(0);
-		this.printQuestion(question);
-		int userChoice = this.getUserChoice(scanner);
 
-		if (userChoice == question.getCorrectNumber()) {
-			System.out.println("正解です");
+		Random random = new Random();
+		while (true) {
+			int randomIndex = random.nextInt(riddles.size());
+			Riddle question = riddles.get(randomIndex);
+			this.printQuestion(question);
+			int userAnswer = this.getUserChoice(scanner);
 
-		} else {
-			System.out.println("不正解です");
+			if (userAnswer == question.getCorrectNumber()) {
+				System.out.println("正解です");
+
+			} else {
+				System.out.println("不正解です");
+			}
+
+			System.out.println("もう一問挑戦しますか？ (1.はい / 2.いいえ)");
+			int choice = Integer.parseInt(scanner.nextLine());
+			if (2 == choice) {
+				break;
+			}
 		}
 	}
 
@@ -74,6 +90,7 @@ public class RiddleApp {
 	public int getUserChoice(Scanner scanner) {
 		System.out.println("正解番号を入力してください(1から3)");
 		while (true) {
+
 			try {
 				int input = Integer.parseInt(scanner.nextLine());
 				if (input < 1 || input > 3) {

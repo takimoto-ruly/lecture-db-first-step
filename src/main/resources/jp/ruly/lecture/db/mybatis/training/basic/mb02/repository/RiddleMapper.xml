@@ -21,11 +21,9 @@
 		SELECT id
 		, question
 		, answer1
-		,
-		answer2
+		, answer2
 		, answer3
-		,
-		correct_number AS correctNumber
+		, correct_number AS correctNumber
 		FROM "riddle"
 		ORDER BY
 		id
